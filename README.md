@@ -38,34 +38,35 @@ In your <b>AndroidManifest.xml</b> class:
 ```java 
 public class AppApplication extends Application {
 
-    private AppApplication _instance;
     private AdsSDK adsSdk;
+    private static MyApplication instance;
 
-    public AppApplication getInstance() {
-        return _instance;
+    public MyApplication() {
+        instance = this;
+        getAdsSdk();
+    }
+
+    public static MyApplication get() {
+        return instance;
     }
 
     public AdsSDK getAdsSdk() {
-        return adsSdk;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        _instance = this;
-        AdsIds adsIds = AdsIds.Builder()
-                .setAdMobAppId(Constant.AD_MOB_ID)
-                .setAdMobBannerId(Constant.BANNER_ID)
-                .setAdMobInterstitialId(Constant.INTERSTITIAL_ID)
-                .setAdMobRewardedVideoId(Constant.REWARDED_VIDEO_ID);
-        adsSdk = AdsSDK.getInstance(this)
+        if(adsSdk == null){
+            AdsIds adsIds = AdsIds.Builder()
+                    .setAdMobAppId(Const.AD_MOB_APP_ID)
+                    .setAdMobBannerId(Const.AD_MOB_BANNER_ID)
+                    .setAdMobInterstitialId(Const.AD_MOB_INTERSTITIAL_ID)
+                    .setAdMobRewardedVideoId(Const.AD_MOB_REWARDED_VIDEO_ID);
+            adsSdk = AdsSDK.getInstance(this)
                 .setEnableTestDevice(false)
                 .setAdsEnabled(true)
                 .setAdsId(adsIds)
                 .initAds();
-                
-                
-        Note: -> when run on emulator use
+        }
+        return adsSdk;
+    }
+    /*
+     Note: -> when run on emulator use
                  .setEnableTestDevice(false)
               -> when run on device use
                  .setEnableTestDevice(true)
@@ -73,15 +74,14 @@ public class AppApplication extends Application {
               -> after getting addTestDevice id use
                  .setEnableTestDevice(true)
                  .addTestDevice("1D3BBA07CC14A4EC5442EB2B3A2CBE7D")
-        
-    }
+     */
 }
 ```
 
 
 #### Banner Ad
 ```java 
-    adsBanner = MyApplication.getInstance()
+    adsBanner = MyApplication.get()
                 .getAdsSdk().getAdsBanner().showBanner(relativeLayout);
     @Override
     public void onPause() {
@@ -104,7 +104,7 @@ public class AppApplication extends Application {
 
 #### Interstitial Ad  
 ```java 
-    MyApplication.getInstance()
+    MyApplication.get()
                 .getAdsSdk().getAdsInterstitial().showInterstitial(this);
                 
         ----------- OR -------------
@@ -134,7 +134,7 @@ public class RewardedVideoAdActivity extends AppCompatActivity {
             }
         });
 
-        adsRewardVideo = MyApplication.getInstance()
+        adsRewardVideo = MyApplication.get()
                 .getAdsSdk().getAdsRewardVideo().initVideo(rewardListener);
 
     }
