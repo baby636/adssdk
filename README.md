@@ -109,6 +109,8 @@ public class AppApplication extends Application {
                 
         ----------- OR -------------
    Activity extends AdsAppCompactActivity
+        ----------- OR -------------
+   FragmentScreen extends AdsCompactFragment
 ```
 
 #### Rewarded Video Ad  
