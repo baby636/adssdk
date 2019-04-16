@@ -54,11 +54,12 @@ public class AppApplication extends Application {
         super.onCreate();
         _instance = this;
         AdsIds adsIds = AdsIds.Builder()
-                .setAdMobAppId(AdMob.AD_MOB_ID)
-                .setAdMobBannerId(AdMob.BANNER_ID)
-                .setAdMobInterstitialId(AdMob.INTERSTITIAL_ID)
-                .setAdMobRewardedVideoId(AdMob.REWARDED_VIDEO_ID);
+                .setAdMobAppId(Constant.AD_MOB_ID)
+                .setAdMobBannerId(Constant.BANNER_ID)
+                .setAdMobInterstitialId(Constant.INTERSTITIAL_ID)
+                .setAdMobRewardedVideoId(Constant.REWARDED_VIDEO_ID);
         adsSdk = AdsSDK.getInstance(this)
+                .setEnableTestDevice(false)
                 .setAdsEnabled(true)
                 .setAdsId(adsIds)
                 .initAds();
