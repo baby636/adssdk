@@ -1,6 +1,7 @@
 package com.adssdk;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.adssdk.advertisment.AdsBanner;
 import com.adssdk.advertisment.AdsInterstitial;
@@ -21,6 +22,7 @@ public class AdsSDK {
     private AdsInterstitial adsInterstitial;
     private AdsBanner adsBanner;
     private AdsRewardedVideo adsRewardVideo;
+    private static String testDeviceId;
 
     public AdsSDK(Context context, boolean isTestAds) {
         this.context = context;
@@ -45,7 +47,11 @@ public class AdsSDK {
             builder.addTestDevice("5E254AC1CF02E640413645E46C8A1A64");
             builder.addTestDevice("2C374DC7F25FC3474B235578C446D36F");
             builder.addTestDevice("A3B72905D6C2F896FBDB8A01F186A77D");
-            builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+            if(!TextUtils.isEmpty(testDeviceId)){
+                builder.addTestDevice(testDeviceId);
+            }else{
+                builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+            }
         }
         return builder.build();
     }
@@ -73,6 +79,10 @@ public class AdsSDK {
         isAdsEnabled = adsEnabled;
         return this;
     }
+    public AdsSDK addTestDevice(String testDeviceId) {
+        AdsSDK.testDeviceId = testDeviceId;
+        return this;
+    }
 
     public AdsSDK setEnableTestDevice(boolean enableTestDevice) {
         AdsSDK.enableTestDevice = enableTestDevice;
@@ -82,6 +92,7 @@ public class AdsSDK {
     public AdsBanner getAdsBanner() {
         return adsBanner;
     }
+
 
     public AdsInterstitial getAdsInterstitial() {
         return adsInterstitial;
