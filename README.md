@@ -18,6 +18,7 @@ allprojects {
 ```gradle
 dependencies {
     implementation 'com.github.appsfeature:adssdk:x.y'
+    implementation 'com.google.android.gms:play-services-ads:17.2.0'
 }
 ```   
 
