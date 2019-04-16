@@ -80,10 +80,9 @@ In your <b>AndroidManifest.xml</b> class:
 ```
 
 #### Rewarded Video Ad  
-```java 
-    public class RewardedVideoAdActivity extends AppCompatActivity {
-
-
+```java
+public class RewardedVideoAdActivity extends AppCompatActivity {
+ 
     private AdsRewardedVideo adsRewardVideo;
     private boolean mVideoAvailable = false;
 
