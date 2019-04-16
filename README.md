@@ -63,6 +63,17 @@ public class AppApplication extends Application {
                 .setAdsEnabled(true)
                 .setAdsId(adsIds)
                 .initAds();
+                
+                
+        Note: -> when run on emulator use
+                 .setEnableTestDevice(false)
+              -> when run on device use
+                 .setEnableTestDevice(true)
+              -> run app and find keyword 'addTestDevice' in logcat
+              -> after getting addTestDevice id use
+                 .setEnableTestDevice(true)
+                 .addTestDevice("1D3BBA07CC14A4EC5442EB2B3A2CBE7D")
+        
     }
 }
 ```
