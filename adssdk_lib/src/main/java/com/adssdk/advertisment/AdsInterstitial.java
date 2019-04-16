@@ -18,12 +18,14 @@ public class AdsInterstitial {
     private Context context;
     private String adId;
     private Activity activity;
+    private boolean isActivityCloseWithAd = true;
     private int failCount = 0;
     public static final int FAILED_MAX_COUNT = 5;
 
     public AdsInterstitial(Context context, String adId) {
         this.context = context;
         this.adId = adId;
+        this.isActivityCloseWithAd = true;
         if (!TextUtils.isEmpty(adId)) {
             initFullAds();
         }
@@ -55,7 +57,7 @@ public class AdsInterstitial {
                 @Override
                 public void onAdClosed() {
                     super.onAdClosed();
-                    if (activity != null) {
+                    if (activity != null && isActivityCloseWithAd) {
                         activity.finish();
                     }
                     initFullAds();
@@ -65,6 +67,10 @@ public class AdsInterstitial {
     }
 
     public void showInterstitial(Activity activity) {
+        showInterstitial(activity, true);
+    }
+    public void showInterstitial(Activity activity, boolean isActivityCloseWithAd) {
+        this.isActivityCloseWithAd = isActivityCloseWithAd;
         this.activity = activity;
         if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();

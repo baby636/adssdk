@@ -13,6 +13,7 @@ import com.google.android.gms.ads.MobileAds;
 public class AdsSDK {
 
     private static AdsSDK adsSDK ;
+    private static boolean enableTestDevice = false;
     private final Context context;
     private boolean isTestAds;
     private AdsIds adsIds;
@@ -40,10 +41,12 @@ public class AdsSDK {
 
     public static AdRequest getAdRequest(){
         AdRequest.Builder builder = new AdRequest.Builder();
-        builder.addTestDevice("5E254AC1CF02E640413645E46C8A1A64");
-        builder.addTestDevice("2C374DC7F25FC3474B235578C446D36F");
-        builder.addTestDevice("A3B72905D6C2F896FBDB8A01F186A77D");
-//        builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+        if(enableTestDevice) {
+            builder.addTestDevice("5E254AC1CF02E640413645E46C8A1A64");
+            builder.addTestDevice("2C374DC7F25FC3474B235578C446D36F");
+            builder.addTestDevice("A3B72905D6C2F896FBDB8A01F186A77D");
+            builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+        }
         return builder.build();
     }
 
@@ -68,6 +71,11 @@ public class AdsSDK {
 
     public AdsSDK setAdsEnabled(boolean adsEnabled) {
         isAdsEnabled = adsEnabled;
+        return this;
+    }
+
+    public AdsSDK setEnableTestDevice(boolean enableTestDevice) {
+        AdsSDK.enableTestDevice = enableTestDevice;
         return this;
     }
 
