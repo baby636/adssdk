@@ -21,7 +21,17 @@ dependencies {
 }
 ```   
 
-In your <b>activity</b> class:
+In your <b>AndroidManifest.xml</b> class:
+#### Usage method
+```java 
+      <application
+           ...
+             <meta-data
+                   android:name="com.google.android.gms.ads.APPLICATION_ID"
+                   android:value="@string/ads_admob_app_id" />
+      </application>
+```
+
 #### Usage method
 ```java 
       AdsIds adsIds = AdsIds.Builder()
@@ -36,17 +46,43 @@ In your <b>activity</b> class:
 ```
 
 
-#### SQLite Helper Refrence
-For gatting SupportSQLiteOpenHelper refrence from Room database
+#### Banner Ad
 ```java 
-    public SupportSQLiteOpenHelper getDBHelper() {
-        return mRoomDatabase.getOpenHelper();
+    adsBanner = MyApplication.getInstance()
+                .getAdsSdk().getAdsBanner().showBanner(relativeLayout);
+    @Override
+    public void onPause() {
+        adsBanner.pause();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adsBanner.resume();
+    }
+
+    @Override
+    public void onDestroy() {
+        adsBanner.destroy();
+        super.onDestroy();
     }
 ```
 
-For gatting SQLiteOpenHelper refrence from SQLite database 
+#### Interstitial Ad  
 ```java 
-    public SQLiteOpenHelper getDbHelper() {
-        return dbHelper;
-    }
+    MyApplication.getInstance()
+                .getAdsSdk().getAdsInterstitial().showInterstitial(this);
+                
+        ----------- OR -------------
+   Activity extends AdsAppCompactActivity
+```
+
+#### Interstitial Ad  
+```java 
+    MyApplication.getInstance()
+                .getAdsSdk().getAdsInterstitial().showInterstitial(this);
+                
+        ----------- OR -------------
+   Activity extends AdsAppCompactActivity
 ```
