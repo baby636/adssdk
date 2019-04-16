@@ -26,6 +26,7 @@ In your <b>AndroidManifest.xml</b> class:
 #### Usage method
 ```xml 
       <application
+        android:name=".AppApplication"
            ...
              <meta-data
                    android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -35,15 +36,34 @@ In your <b>AndroidManifest.xml</b> class:
 
 #### Usage method
 ```java 
-      AdsIds adsIds = AdsIds.Builder()
-                    .setAdMobAppId(Const.AD_MOB_APP_ID)
-                    .setAdMobBannerId(Const.AD_MOB_BANNER_ID)
-                    .setAdMobInterstitialId(Const.AD_MOB_INTERSTITIAL_ID)
-                    .setAdMobRewardedVideoId(Const.AD_MOB_REWARDED_VIDEO_ID);
-      AdsSDK adsSdk = AdsSDK.getInstance(this)
+public class AppApplication extends Application {
+
+    private AppApplication _instance;
+    private AdsSDK adsSdk;
+
+    public AppApplication getInstance() {
+        return _instance;
+    }
+
+    public AdsSDK getAdsSdk() {
+        return adsSdk;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        _instance = this;
+        AdsIds adsIds = AdsIds.Builder()
+                .setAdMobAppId(AdMob.AD_MOB_ID)
+                .setAdMobBannerId(AdMob.BANNER_ID)
+                .setAdMobInterstitialId(AdMob.INTERSTITIAL_ID)
+                .setAdMobRewardedVideoId(AdMob.REWARDED_VIDEO_ID);
+        adsSdk = AdsSDK.getInstance(this)
                 .setAdsEnabled(true)
                 .setAdsId(adsIds)
                 .initAds();
+    }
+}
 ```
 
 
