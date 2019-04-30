@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.adssdk.advertisment.AdsBanner;
@@ -12,8 +11,6 @@ import com.adssdk.advertisment.AdsBanner;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnFullscreenAd, btnShowRewardedVideoAd;
-    private RelativeLayout relativeAdView;
     private AdsBanner adsBanner;
 
     @Override
@@ -21,28 +18,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        RelativeLayout relativeAdView = findViewById(R.id.relative_ad_view);
 
-        relativeAdView = (RelativeLayout) findViewById(R.id.relativeAdView);
-        btnFullscreenAd = (Button) findViewById(R.id.btn_fullscreen_ad);
-        btnShowRewardedVideoAd = (Button) findViewById(R.id.btn_show_rewarded_video);
-        btnFullscreenAd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, InterstitialAdActivity.class));
-            }
-        });
+        addLickListener();
 
-        btnShowRewardedVideoAd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, RewardedVideoAdActivity.class));
-            }
-        });
-
-
-        adsBanner = MyApplication.getInstance()
+        adsBanner = MyApplication.get()
                 .getAdsSdk().getAdsBanner().showBanner(relativeAdView);
-
 
     }
 
@@ -63,4 +44,22 @@ public class MainActivity extends AppCompatActivity {
         adsBanner.destroy();
         super.onDestroy();
     }
+
+
+    private void addLickListener() {
+        (findViewById(R.id.btn_fullscreen_ad)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, InterstitialAdActivity.class));
+            }
+        });
+
+        (findViewById(R.id.btn_show_rewarded_video)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RewardedVideoAdActivity.class));
+            }
+        });
+    }
+
 }

@@ -37,7 +37,7 @@
         <!--ads:adSize="BANNER"-->
         <!--ads:adUnitId="@string/banner_home_footer"/>-->
      <RelativeLayout
-        android:id="@+id/relativeAdView"
+        android:id="@+id/relative_ad_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

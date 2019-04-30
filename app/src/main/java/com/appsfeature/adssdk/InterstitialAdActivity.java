@@ -13,7 +13,7 @@ public class InterstitialAdActivity extends AdsAppCompactActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        MyApplication.getInstance()
+        MyApplication.get()
                 .getAdsSdk().getAdsInterstitial().showInterstitial(this);
 
 

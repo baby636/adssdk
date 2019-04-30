@@ -12,14 +12,19 @@ import com.adssdk.AdsSDK;
 
 public class AdsCompactFragment extends Fragment {
 
+    protected boolean isAdVisible = true;
+
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (AdsSDK.getInstance() != null && AdsSDK.getInstance().getAdsInterstitial() != null) {
+        showAds();
+    }
+
+    protected void showAds() {
+        if (isAdVisible && AdsSDK.getInstance().isAdsEnabled() && AdsSDK.getInstance() != null && AdsSDK.getInstance().getAdsInterstitial() != null) {
             AdsSDK.getInstance().getAdsInterstitial().showInterstitial(getActivity(), false);
         }
     }
-
 
 
     //    @Override

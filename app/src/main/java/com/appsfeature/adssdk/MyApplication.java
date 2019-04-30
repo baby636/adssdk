@@ -16,16 +16,13 @@ public class MyApplication extends Application {
     private AdsSDK adsSdk;
     private static MyApplication instance;
 
-    public static MyApplication getInstance() {
-        return instance;
+    public MyApplication() {
+        instance = this;
+        getAdsSdk();
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        instance = this;
-
-        getAdsSdk();
+    public static MyApplication get() {
+        return instance;
     }
 
     public AdsSDK getAdsSdk() {

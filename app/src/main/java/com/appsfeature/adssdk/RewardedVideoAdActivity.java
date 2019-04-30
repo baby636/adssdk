@@ -31,7 +31,7 @@ public class RewardedVideoAdActivity extends AppCompatActivity {
             }
         });
 
-        adsRewardVideo = MyApplication.getInstance()
+        adsRewardVideo = MyApplication.get()
                 .getAdsSdk().getAdsRewardVideo().initVideo(rewardListener);
 
     }

@@ -2,6 +2,7 @@ package com.adssdk.advertisment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
 import com.adssdk.AdsSDK;
@@ -74,7 +75,20 @@ public class AdsInterstitial {
         this.activity = activity;
         if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
-        } else if (activity != null)
-            activity.finish();
+        } else if (activity != null) {
+            if(isActivityCloseWithAd) {
+                activity.finish();
+            }
+        }
+    }
+    public void showInterstitial(Fragment fragment, boolean isActivityCloseWithAd) {
+        this.isActivityCloseWithAd = isActivityCloseWithAd;
+        if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }  else if (activity != null) {
+            if(isActivityCloseWithAd) {
+                activity.finish();
+            }
+        }
     }
 }
