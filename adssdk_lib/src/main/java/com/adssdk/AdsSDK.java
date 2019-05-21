@@ -16,6 +16,7 @@ public class AdsSDK {
 
     private static AdsSDK adsSDK ;
     private static boolean enableTestDevice = false;
+    public static boolean onBackPressed = false;
     private final Context context;
     private boolean isTestAds;
     private AdsIds adsIds;
@@ -89,6 +90,11 @@ public class AdsSDK {
 
     public AdsSDK setEnableTestDevice(boolean enableTestDevice) {
         AdsSDK.enableTestDevice = enableTestDevice;
+        return this;
+    }
+
+    public AdsSDK enableOnBackPressed(boolean onBackPressed) {
+        AdsSDK.onBackPressed = onBackPressed;
         return this;
     }
 

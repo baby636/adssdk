@@ -23,6 +23,7 @@ public class OfflineAdsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_offline_ads);
+        isClose = AdsSDK.onBackPressed;
         activity = this;
         initUi();
     }

@@ -39,6 +39,7 @@ public class MyApplication extends Application {
                     .setAdMobInterstitialId(Const.AD_MOB_INTERSTITIAL_ID)
                     .setAdMobRewardedVideoId(Const.AD_MOB_REWARDED_VIDEO_ID);
             adsSdk = AdsSDK.getInstance(instance)
+                    .enableOnBackPressed(true)
                     .setAdsEnabled(true)
                     .setAdsId(adsIds)
                     .initAds();
