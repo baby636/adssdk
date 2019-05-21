@@ -98,7 +98,9 @@ public class AdsInterstitial {
             mInterstitialAd.show();
         } else if (mActivity != null) {
             if (activity != null) {
-                activity.startActivity(new Intent(activity, OfflineAdsActivity.class));
+                if(!OfflineAdsActivity.isActivityVisible) {
+                    activity.startActivity(new Intent(activity, OfflineAdsActivity.class));
+                }
             } else if (fragmentActivity != null) {
                 if(addingFragment){
                     AdsUtil.addFragment(fragmentActivity, new OfflineAds());

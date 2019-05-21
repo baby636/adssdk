@@ -3,6 +3,7 @@ package com.adssdk;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.adssdk.activity.OfflineAdsActivity;
 import com.adssdk.advertisment.AdsBanner;
 import com.adssdk.advertisment.AdsInterstitial;
 import com.adssdk.advertisment.AdsRewardedVideo;
@@ -27,6 +28,7 @@ public class AdsSDK {
     public AdsSDK(Context context, boolean isTestAds) {
         this.context = context;
         this.isTestAds = isTestAds;
+        OfflineAdsActivity.isActivityVisible = false;
     }
 
 
