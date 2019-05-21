@@ -20,10 +20,18 @@
         android:text="@string/btn_fullscreen_ad" />
 
     <Button
-        android:id="@+id/btn_show_rewarded_video"
+        android:id="@+id/btn_fullscreen_ad_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_fullscreen_ad"
+        android:layout_centerInParent="true"
+        android:text="@string/btn_fullscreen_ad" />
+
+    <Button
+        android:id="@+id/btn_show_rewarded_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_fullscreen_ad_fragment"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="@string/btn_rewarded_video" />

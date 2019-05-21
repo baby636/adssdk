@@ -3,6 +3,7 @@
     <string name="title_activity_second_activiy">Interstitial</string>
     <string name="msg_welcome">Welcome to Admob. Click on the below button to launch the Interstitial ad.</string>
     <string name="btn_fullscreen_ad">Show Interstitial Ad</string>
+    <string name="btn_fullscreen_ad2">Show Interstitial Ad in Fragment</string>
     <string name="btn_rewarded_video">Show Rewarded Video Ad</string>
 
 

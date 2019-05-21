@@ -12,11 +12,6 @@ public class InterstitialAdActivity extends AdsAppCompactActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-
-        MyApplication.get()
-                .getAdsSdk().getAdsInterstitial().showInterstitial(this);
-
-
     }
 
 }

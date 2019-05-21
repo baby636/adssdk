@@ -2,10 +2,14 @@ package com.adssdk.advertisment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.Fragment;
+import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 
 import com.adssdk.AdsSDK;
+import com.adssdk.activity.OfflineAdsActivity;
+import com.adssdk.fragment.OfflineAds;
+import com.adssdk.util.AdsUtil;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.InterstitialAd;
 
@@ -18,7 +22,7 @@ public class AdsInterstitial {
 
     private Context context;
     private String adId;
-    private Activity activity;
+    private Activity mActivity;
     private boolean isActivityCloseWithAd = true;
     private int failCount = 0;
     public static final int FAILED_MAX_COUNT = 5;
@@ -58,8 +62,8 @@ public class AdsInterstitial {
                 @Override
                 public void onAdClosed() {
                     super.onAdClosed();
-                    if (activity != null && isActivityCloseWithAd) {
-                        activity.finish();
+                    if (mActivity != null && isActivityCloseWithAd) {
+                        mActivity.finish();
                     }
                     initFullAds();
                 }
@@ -68,26 +72,39 @@ public class AdsInterstitial {
     }
 
     public void showInterstitial(Activity activity) {
+        showInterstitial(null, activity, true, false);
+    }
+
+    public void showInterstitial(FragmentActivity activity) {
         showInterstitial(activity, true);
     }
-    public void showInterstitial(Activity activity, boolean isActivityCloseWithAd) {
-        this.isActivityCloseWithAd = isActivityCloseWithAd;
-        this.activity = activity;
-        if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        } else if (activity != null) {
-            if(isActivityCloseWithAd) {
-                activity.finish();
-            }
-        }
+
+    public void showInterstitial(FragmentActivity activity, boolean addingFragment) {
+        showInterstitial(activity, null, false, addingFragment);
     }
-    public void showInterstitial(Fragment fragment, boolean isActivityCloseWithAd) {
+
+    public void showInterstitial(Activity activity, boolean isActivityCloseWithAd) {
+        showInterstitial(null, activity, isActivityCloseWithAd, false);
+    }
+
+    private void showInterstitial(FragmentActivity fragmentActivity, Activity activity, boolean isActivityCloseWithAd, boolean addingFragment) {
         this.isActivityCloseWithAd = isActivityCloseWithAd;
+        if (activity != null) {
+            this.mActivity = activity;
+        } else {
+            this.mActivity = fragmentActivity;
+        }
         if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
-        }  else if (activity != null) {
-            if(isActivityCloseWithAd) {
-                activity.finish();
+        } else if (mActivity != null) {
+            if (activity != null) {
+                activity.startActivity(new Intent(activity, OfflineAdsActivity.class));
+            } else if (fragmentActivity != null) {
+                if(addingFragment){
+                    AdsUtil.addFragment(fragmentActivity, new OfflineAds());
+                }else {
+                    fragmentActivity.startActivity(new Intent(fragmentActivity, OfflineAdsActivity.class));
+                }
             }
         }
     }

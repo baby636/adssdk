@@ -15,8 +15,14 @@ public class MyApplication extends Application {
 
     private AdsSDK adsSdk;
     private static MyApplication instance;
+//
+//    public MyApplication() {
+//        instance = this;
+//    }
 
-    public MyApplication() {
+    @Override
+    public void onCreate() {
+        super.onCreate();
         instance = this;
         getAdsSdk();
     }
@@ -32,7 +38,7 @@ public class MyApplication extends Application {
                     .setAdMobBannerId(Const.AD_MOB_BANNER_ID)
                     .setAdMobInterstitialId(Const.AD_MOB_INTERSTITIAL_ID)
                     .setAdMobRewardedVideoId(Const.AD_MOB_REWARDED_VIDEO_ID);
-            adsSdk = AdsSDK.getInstance(this)
+            adsSdk = AdsSDK.getInstance(instance)
                     .setAdsEnabled(true)
                     .setAdsId(adsIds)
                     .initAds();
