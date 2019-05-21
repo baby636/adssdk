@@ -98,16 +98,21 @@ public class AdsInterstitial {
             mInterstitialAd.show();
         } else if (mActivity != null) {
             if (activity != null) {
-                if(!OfflineAdsActivity.isActivityVisible) {
-                    activity.startActivity(new Intent(activity, OfflineAdsActivity.class));
-                }
+                startActivity(activity);
             } else if (fragmentActivity != null) {
-                if(addingFragment){
+                if (addingFragment) {
                     AdsUtil.addFragment(fragmentActivity, new OfflineAds());
-                }else {
-                    fragmentActivity.startActivity(new Intent(fragmentActivity, OfflineAdsActivity.class));
+                } else {
+                    startActivity(fragmentActivity);
                 }
             }
+        }
+    }
+
+    private void startActivity(Activity activity) {
+        if (!AdsSDK.isActivityVisible) {
+            AdsSDK.isActivityVisible = true;
+            activity.startActivity(new Intent(activity, OfflineAdsActivity.class));
         }
     }
 }

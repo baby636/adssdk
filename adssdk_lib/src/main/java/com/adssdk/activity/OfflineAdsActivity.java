@@ -18,13 +18,11 @@ public class OfflineAdsActivity extends AppCompatActivity {
 
     private OfflineAdsActivity activity;
     private boolean isClose = false;
-    public static boolean isActivityVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_offline_ads);
-        isActivityVisible = true;
         activity = this;
         initUi();
     }
@@ -50,14 +48,14 @@ public class OfflineAdsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(isClose) {
-            isActivityVisible = false;
+            AdsSDK.isActivityVisible = false;
             super.onBackPressed();
         }
     }
 
     @Override
     protected void onDestroy() {
-        isActivityVisible = false;
+        AdsSDK.isActivityVisible = false;
         super.onDestroy();
     }
 }

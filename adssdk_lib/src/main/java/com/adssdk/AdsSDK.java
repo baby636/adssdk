@@ -24,11 +24,12 @@ public class AdsSDK {
     private AdsBanner adsBanner;
     private AdsRewardedVideo adsRewardVideo;
     private static String testDeviceId;
+    public static boolean isActivityVisible;
 
     public AdsSDK(Context context, boolean isTestAds) {
         this.context = context;
         this.isTestAds = isTestAds;
-        OfflineAdsActivity.isActivityVisible = false;
+        this.isActivityVisible = false;
     }
 
 
